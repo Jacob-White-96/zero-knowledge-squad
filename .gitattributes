@@ -1,0 +1,28 @@
+# Normalize all text files to LF (Unix-style line endings)
+* text=auto eol=lf
+
+# Python scripts — always use LF
+*.py text eol=lf
+
+# Shell scripts — always use LF
+*.sh text eol=lf
+
+# Solidity smart contracts — treat as UTF-8 text with LF
+*.sol text eol=lf
+
+# HTML, CSS, JS — always use LF for frontend files
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+
+# Markdown and config files
+*.md text eol=lf
+*.txt text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Ignore diffs for binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
