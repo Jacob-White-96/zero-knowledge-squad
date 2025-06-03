@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Contract Audit Tool</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <h1 class="page-title">SMART CONTRACT AUDIT TOOL</h1>
+  <div class="wrapper">
+    <div class="panel-container">
+      <div class="panel code-panel">
+        <h2>Solidity Code</h2>
+        <textarea id="codeInput" placeholder="Paste your Solidity code here..."></textarea>
+      </div>
+      <div class="panel report-panel">
+        <h2>Vulnerability Report</h2>
+        <pre id="reportOutput">Report will appear here...</pre>
+      </div>
+    </div>
+    <div class="button-container">
+      <button id="analyzeBtn">Analyze</button>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
