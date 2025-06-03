@@ -1,8 +1,9 @@
-# app/main.py
-
-from backend.main import Flask, request, jsonify
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from slither import run_slither_analysis
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/analyze", methods=["POST"])
 def analyze_contract():
@@ -12,13 +13,9 @@ def analyze_contract():
     if not solidity_code:
         return jsonify({"error": "No Solidity code provided"}), 400
 
-    # Placeholder response
-    dummy_report = {
-        "slither_report": "SMART CONTRACT VULNERABILITY REPORT (placeholder)",
-        "llm_summary": "This contract appears to be a basic Solidity contract. No real analysis has been performed yet."
-    }
+    slither_report = run_slither_analysis(solidity_code)
 
-    return jsonify(dummy_report)
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    return jsonify({
+        "slither_report": slither_report,
+        "llm_summary": "This contract appears to be a basic Solidity contract. No LLM analysis has been performed yet."
+    })
