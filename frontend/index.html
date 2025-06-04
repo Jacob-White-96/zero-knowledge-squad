@@ -14,8 +14,16 @@
         <h2>Solidity Code</h2>
         <textarea id="codeInput" placeholder="Paste your Solidity code here..."></textarea>
       </div>
+      <button id="downloadBtn" style="display:none; margin-top: 1rem;">Download PDF Report</button>
       <div class="panel report-panel">
         <h2>Vulnerability Report</h2>
+        <div class="risk-score-bar" style="display: none;">
+          <label>Risk Score:</label>
+          <div style="height: 20px; width: 100%; background: #eee; border-radius: 10px; overflow: hidden;">
+            <div id="scoreBarFill" style="height: 100%; width: 0%; background: green;"></div>
+          </div>
+          <p id="scoreLabel"></p>
+        </div>        
         <pre id="reportOutput">Report will appear here...</pre>
       </div>
     </div>
@@ -23,7 +31,7 @@
       <button id="analyzeBtn">Analyze</button>
     </div>
   </div>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="scripts.js"></script>
 </body>
 </html>
