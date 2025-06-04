@@ -1,11 +1,9 @@
-# app.py (main Flask backend)
-
 from flask import Flask, request, jsonify
-import os, subprocess, uuid
+from flask_cors import CORS
+from slither import run_slither_analysis
 
 app = Flask(__name__)
-TMP_FOLDER = 'tmp_contracts'
-os.makedirs(TMP_FOLDER, exist_ok=True)
+CORS(app)
 
 @app.route("/analyze", methods=["POST"])
 def analyze_contract():
@@ -15,21 +13,9 @@ def analyze_contract():
     if not solidity_code:
         return jsonify({"error": "No Solidity code provided"}), 400
 
-    # Save code to temporary .sol file
-    filename = f"{TMP_FOLDER}/temp_{uuid.uuid4().hex}.sol"
-    with open(filename, 'w') as f:
-        f.write(solidity_code)
-
-    # Run Slither on the saved file
-    result = subprocess.getoutput(f"slither {filename}")
-
-    # Create a dummy LLM-like summary
-    llm_summary = "This is a simulated audit summary. Detected issues include common patterns like reentrancy or unguarded access."
+    slither_report = run_slither_analysis(solidity_code)
 
     return jsonify({
-        "slither_report": result,
-        "llm_summary": llm_summary
+        "slither_report": slither_report,
+        "llm_summary": "This contract appears to be a basic Solidity contract. No LLM analysis has been performed yet."
     })
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)

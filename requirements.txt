@@ -1,1 +1,4 @@
 flask
+openai
+slither-analyzer
+flask-cors
