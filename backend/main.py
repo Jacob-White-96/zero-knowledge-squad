@@ -25,8 +25,7 @@ And here is the Slither static analysis report for that contract:
 Please analyze the contract in light of the Slither report and provide a summary of the potential vulnerabilities, severity levels, and recommendations. Your output should be structured and easy to read.
 """
 
-BASELINE_LLM_RESPONSE = """LLM Summary:
-### Security Audit Report for `EtherStore` Contract
+BASELINE_LLM_RESPONSE = """### Security Audit Report for `EtherStore` Contract
 
 ---
 
