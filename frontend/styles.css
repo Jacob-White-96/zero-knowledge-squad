@@ -21,23 +21,54 @@ body {
   width: 100%;
 }
 
-.panel {
+.split-wrapper {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+  position: relative;
   flex: 1;
-  background-color: white;
-  padding: 30px;
-  border-radius: 10px;
-  border: 2px solid #ccc;
-  box-shadow: 0 0 15px rgba(0,0,0,0.05);
+  min-height: 0;
+}
+
+.panel {
   display: flex;
   flex-direction: column;
-  min-width: 0;
+  box-sizing: border-box;
+  flex: 1;
+  min-width: 0;  /* ✅ for preventing overflow */
+  min-height: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+}
+
+.resizer {
+  width: 4px;
+  background: #aaa;
+  cursor: col-resize;
+  user-select: none;
+  flex-shrink: 0;     /* ✅ prevents it from being squashed */
 }
 
 /* Panels */
-.code-panel   { border-color: #2ecc71; }
-.report-panel { border-color: #e74c3c; }
+.code-panel,
+.report-panel {
+  padding: 20px;
+  box-sizing: border-box;
+  border: 2px solid;
+}
+
+.code-panel {
+  border-color: #2ecc71; /* green */
+}
+
+.report-panel {
+  border-color: #e74c3c; /* red */
+}
 
 #reportOutput {
+  padding: 10px;
   flex: 1;
   overflow-y: auto;
   max-height: 100%;
@@ -64,9 +95,12 @@ pre {
 pre {
   background-color: #eef5ff;
   white-space: pre-wrap;     /* ✅ wrap long lines */
-  word-break: break-word;    /* ✅ break very long words/URLs */
+  word-break: break-word;    /* ✅ break long tokens */
   overflow-y: auto;
+  flex: 1;
+  min-height: 0;
 }
+
 
 /* Headings */
 .page-title {

@@ -111,3 +111,39 @@ document.getElementById("downloadBtn").onclick = () => {
   doc.save("audit_report.pdf");
 };
 
+// --- Resizable Split Panels (Code / Report) ---
+window.addEventListener("DOMContentLoaded", () => {
+  const resizer = document.querySelector(".resizer");
+  const leftPanel = resizer?.previousElementSibling;
+  const rightPanel = resizer?.nextElementSibling;
+
+  if (!resizer || !leftPanel || !rightPanel) return;
+
+  let isDragging = false;
+
+  resizer.addEventListener("mousedown", () => {
+    isDragging = true;
+    document.body.style.cursor = "col-resize";
+  });
+
+  document.addEventListener("mousemove", e => {
+    if (!isDragging) return;
+
+    const container = resizer.parentNode;
+    const containerLeft = container.getBoundingClientRect().left;
+    const pointerX = e.clientX - containerLeft;
+    const containerWidth = container.offsetWidth;
+
+    const leftWidth = (pointerX / containerWidth);
+    const rightWidth = 1 - leftWidth;
+
+    leftPanel.style.flexGrow = leftWidth;
+    rightPanel.style.flexGrow = rightWidth;
+
+  });
+
+  document.addEventListener("mouseup", () => {
+    isDragging = false;
+    document.body.style.cursor = "default";
+  });
+});
