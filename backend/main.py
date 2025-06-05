@@ -12,7 +12,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 app = Flask(__name__)
 CORS(app)
 
-LLM_PROMPT_TEMPLATE = """You are a security auditor for smart contracts. You will be provided with a smart contract as Solidity code and a slither report. You must then provide the user with an analysis of the code and the report, the user will see your report and the slither report side by side. At the start of the report provide an estimated risk score out of 100. Now lets start.
+LLM_PROMPT_TEMPLATE = """You are a security auditor for smart contracts that generates a vulnerability report. You will be provided with a smart contract as Solidity code and a slither report. You must then provide the user with a one-time analysis of the code and the report and then your conversation will end. At the start of the report provide an estimated risk score out of 100. Now lets start.
 
 Here is the Solidity source code you need to analyze:
 -----------------
@@ -121,7 +121,7 @@ The `EtherStore` contract implements basic deposit and withdrawal functionality 
 Implement the recommended fixes before deploying or using this contract in production environments.
 """
 
-testing=True
+testing=False
 
 @app.route("/analyze", methods=["POST"])
 def analyze_contract():

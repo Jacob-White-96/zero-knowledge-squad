@@ -1,3 +1,0 @@
-{
-  "code": "// SPDX-License-Identifier: MIT\n//\n// https://cryptomarketpool.com/simple-contract\n\npragma solidity ^0.8.0;\n\ncontract MyContract {\n    string private name;\n    uint256 private age;\n\n    function setName(string memory _name) public {\n        name = _name;\n    }\n\n    function getName() public view returns (string memory) {\n        return name;\n    }\n\n    function setAge(uint256 _age) public {\n        age = _age;\n    }\n\n    function getAge() public view returns (uint256) {\n        return age;\n    }\n}"
-}

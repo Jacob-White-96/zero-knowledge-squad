@@ -28,19 +28,21 @@ document.getElementById("analyzeBtn").addEventListener("click", async () => {
     // ✅ Show Risk Score Bar
     const scoreFill = document.getElementById("scoreBarFill");
     const scoreLabel = document.getElementById("scoreLabel");
+    const scoreBar = document.querySelector(".risk-score-bar");
 
-    scoreFill.style.width = `${riskScore}%`;
-    scoreLabel.innerText = `${riskScore}/100`;
+    if (scoreFill && scoreLabel && scoreBar) {
+      scoreFill.style.width = `${riskScore}%`;
+      scoreLabel.innerText = `${riskScore}/100`;
 
-    if (riskScore >= 80) {
-      scoreFill.style.background = "green";
-    } else if (riskScore >= 50) {
-      scoreFill.style.background = "orange";
-    } else {
-      scoreFill.style.background = "red";
+      if (riskScore >= 80) {
+        scoreFill.style.background = "green";
+      } else if (riskScore >= 50) {
+        scoreFill.style.background = "orange";
+      } else {
+        scoreFill.style.background = "red";
+      }
+      scoreBar.style.display = "block";
     }
-
-    document.querySelector(".risk-score-bar").style.display = "block";
 
     // ✅ Enhanced Output With Fix Suggestions
     let enhancedReport = '';
@@ -54,17 +56,18 @@ document.getElementById("analyzeBtn").addEventListener("click", async () => {
     });
 
     document.getElementById("reportOutput").innerHTML = `
-      <strong>Risk Score:</strong> ${riskScore}/100<br><br>
-      <strong>LLM Summary:</strong><br>${summary}<br><br>
-      <strong>Formatted Report:</strong><br>${enhancedReport}
+      ${marked.parse(summary)}<br><br>
+      <strong>Slither Report:</strong><br>${enhancedReport}
     `;
+
 
     // ✅ Store full report for download
     const plainEnhanced = enhancedReport
       .replace(/<[^>]+>/g, '')  // Remove HTML tags for clean PDF
       .replace(/<br>/g, '\n');  // Convert <br> to line breaks
 
-    window.fullReport = `Risk Score: ${riskScore}/100\n\nLLM Summary:\n${summary}\n\nFormatted Report:\n${plainEnhanced}`;
+    window.fullReport = `${summary}\n\nSlither Report:\n${plainEnhanced}`;
+
 
     document.getElementById("downloadBtn").style.display = "inline-block";
 
