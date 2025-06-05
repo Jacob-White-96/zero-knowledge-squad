@@ -167,3 +167,29 @@ button {
 button:hover {
   background-color: #c0392b;
 }
+
+/* Download button matches Analyze button style */
+#downloadBtn {
+  background-color: #3498db; /* blue variant */
+  color: white;
+  padding: 10px 24px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.2s ease;
+}
+
+#downloadBtn:hover {
+  background-color: #2980b9;
+}
+
+/* Heading visibility fix */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: #2c3e50;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
